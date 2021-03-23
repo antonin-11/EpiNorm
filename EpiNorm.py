@@ -5,7 +5,6 @@ def check_o2(name, file):
     if (name[-2:] != ".h" and name[-2:] != ".c"):
         print("Erreur (O2) fichier interdit " + name)
 
-
 def verif_norm(path, file_name):
     if (file_name[-2:] == ".h"):
         fd = open(path, "r")
