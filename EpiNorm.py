@@ -201,6 +201,7 @@ def check_L3(name, file):
     mot_cle = [" for(", " while(", " if(", " else(", " else if(", " return("]
     mot_cle2 = [" for ", " while ", " if ", " else", " else if ", " return "]
     mot_cle3 = ["for", "while", "if", "else", "else if", "return"]
+
     for index, line in enumerate(file):
         for p in range(5):
             if (mot_cle[p] in line):
