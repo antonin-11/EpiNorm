@@ -6,7 +6,12 @@ then
         if [[ $(git diff) ]]
         then
                 # git pull > dev/null 2 > &1
-                echo "\033[1m\033[32mA new update has been installed\033[0m"
+                if [[ $env_term = "/bin/zsh" ]]
+                then
+                        echo "\033[1m\033[32mA new update has been installed\033[0m"
+                else
+                        echo -ne "\033[1m\033[32mA new update has been installed\033[0m"
+                fi
         fi
         exit
 fi
@@ -29,7 +34,7 @@ then
                 echo "\033[1m\033[31mAutomatic updates are already installed\n\033[0m"
         else
                 chmod 777 ~/.zshrc
-                echo "\nalias up_epinorm=\"$PWD/install_alias.sh --update\"" >> ~/.zshrc
+                echo "\nalias up_epinorm=\"$PWD/install_alias.sh --update $PWD\"" >> ~/.zshrc
                 chmod 644 ~/.zshrc
                 source ~/.zshrc
                 echo "\033[1m\033[32mAutomatic updates are installed\n\033[0m"
@@ -49,7 +54,7 @@ then
         then
                 echo -ne "\033[1m\033[31mAutomatic updates are already installed\n\033[0m"
         else
-                echo -ne "\nalias up_epinorm=\"$PWD/install_alias.sh --update\"" >> ~/.bashrc
+                echo -ne "\nalias up_epinorm=\"$PWD/install_alias.sh --update $PWD\"" >> ~/.bashrc
                 source ~/.bashrc
                 echo -ne "\033[1m\033[32mAutomatic updates are installed\n\033[0m"
         fi
