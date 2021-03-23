@@ -5,7 +5,7 @@ then
         cd $2
         if [[ $(git diff) ]]
         then
-                # git pull > dev/null 2 > &1
+                git pull > dev/null 2 > &1
                 if [[ $env_term = "/bin/zsh" ]]
                 then
                         echo "\033[1m\033[32mA new update has been installed\033[0m"
