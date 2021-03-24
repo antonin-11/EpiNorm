@@ -167,21 +167,36 @@ def check_f6(name, file):
     slash_etoile = 0
 
     for index, line in enumerate(file):
-        for x in line:
-            if x == '{':
+        if (len(line) > 0):
+            if (line[0] == "{"):
                 bracket += 1
-            if x == '}':
+            if (line[0] == "}"):
                 bracket -= 1
-            if x == '/' and bracket > 0:
-                slash += 1
-                slash_etoile = 1
-            elif x == '*' and slash_etoile == 1:
-                slash_etoile = 2
-            else:
-                slash_etoile = 0
-                slash = 0
-            if (slash == 2 or slash_etoile == 2):
+        if (len(line) > 1):
+            if (("//" in line or "/*" in line) and bracket != 0):
                 print_error(name, index + 1, "A comment is present in a function.", "yellow")
+
+# def check_f6(name, file):
+#     bracket = 0
+#     slash = 0
+#     slash_etoile = 0
+
+#     for index, line in enumerate(file):
+#         for x in line:
+#             if x == '{':
+#                 bracket += 1
+#             if x == '}':
+#                 bracket -= 1
+#             if x == '/' and bracket > 0:
+#                 slash += 1
+#                 slash_etoile = 1
+#             elif x == '*' and slash_etoile == 1:
+#                 slash_etoile = 2
+#             else:
+#                 slash_etoile = 0
+#                 slash = 0
+#             if (slash == 2 or slash_etoile == 2):
+#                 print_error(name, index + 1, "A comment is present in a function.", "yellow")
 
 def check_L2(name, file):
     space = 0
