@@ -10,7 +10,7 @@ def verif_norm(path, file_name):
         fd = open(path, "r")
         sto = fd.read()
         file = sto.split('\n')
-        check_v1(path, file)
+        check_V1(path, file)
         fd.close()
     if (file_name[-2:] == ".c"):
         fd = open(path, "r")
