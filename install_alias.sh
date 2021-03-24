@@ -2,6 +2,7 @@ env_term=$(printenv SHELL)
 
 if [ $1 ]
 then
+        ls > /dev/null
 else
         if [[ $1 = "--update" ]]
         then
