@@ -1,19 +1,22 @@
 env_term=$(printenv SHELL)
 
-if [[ $1 = "--update" ]]
+if [[$1]]
 then
-        cd $2
-        if [[ $(git diff) ]]
+        if [[ $1 = "--update" ]]
         then
-                git pull > /dev/null 2>&1
-                if [[ $env_term = "/bin/zsh" ]]
+                cd $2
+                if [[ $(git diff) ]]
                 then
-                        echo "\033[1m\033[32mA new update has been installed\n\033[0m"
-                else
-                        echo -ne "\033[1m\033[32mA new update has been installed\n\033[0m"
+                        git pull > /dev/null 2>&1
+                        if [[ $env_term = "/bin/zsh" ]]
+                        then
+                                echo "\033[1m\033[32mA new update has been installed\n\033[0m"
+                        else
+                                echo -ne "\033[1m\033[32mA new update has been installed\n\033[0m"
+                        fi
                 fi
+                exit
         fi
-        exit
 fi
 
 if [ $env_term = "/bin/zsh" ]
