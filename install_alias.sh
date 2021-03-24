@@ -1,6 +1,6 @@
 env_term=$(printenv SHELL)
 
-if [[$1]]
+if [[ $1 ]]
 then
         if [[ $1 = "--update" ]]
         then
