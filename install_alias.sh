@@ -1,7 +1,8 @@
 env_term=$(printenv SHELL)
 
-if [[ $1 ]]
+if [ $1 ]
 then
+else
         if [[ $1 = "--update" ]]
         then
                 cd $2
