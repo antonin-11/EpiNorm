@@ -12,7 +12,7 @@ def verif_norm(path, file_name):
         file = sto.split('\n')
         check_V1(path, file)
         fd.close()
-    if (file_name[-2:] == ".c"):
+    elif (file_name[-2:] == ".c"):
         fd = open(path, "r")
         sto = fd.read()
         file = sto.split('\n')
@@ -67,19 +67,19 @@ def print_error(file, line, info, color):
 # ------CHECK------ #
 
 def check_V1(name, file):
-    declaration = ["int ", "char ", "float ", "bool ", "_t"]
+    declaration = ["int ", "char ", "float ", "bool ", "_t", "_s"]
     num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    # for index, line in enumerate(file):
+    #     for p in range(5):
+    #         for q in range(10):
+    #             if (declaration[p] in line and num[q] in line and "//" not in line):
+    #                 if p == 5:
+    #                     print_error(name, index + 1, "In your declaration of struct you have a number (" + num[q] + ")." , "yellow")
+    #                 else:
+    #                     print_error(name, index + 1, "In your declaration [" + declaration[p] + "] you have a number (" + num[q] + ")." , "yellow")
     for index, line in enumerate(file):
-        for p in range(5):
-            for q in range(10):
-                if (declaration[p] in line and num[q] in line and "//" not in line):
-                    if p == 5:
-                        print_error(name, index + 1, "In your declaration of struct you have a number (" + num[q] + ")." , "yellow")
-                    else:
-                        print_error(name, index + 1, "In your declaration [" + declaration[p] + "] you have a number (" + num[q] + ")." , "yellow")
-    for index, line in enumerate(file):
-        if ("typedef" in line and "_t" not in line):
-            print_error(name, index + 1, "In your declaration typedef[struct] you have a invalid name (need *_t)." , "red")
+        if ("typedef" in line and ("_t" not in line and "_s" not in line)):
+            print_error(name, index + 1, "In your declaration typedef[struct] you have a invalid name (need *_s or *_t)." , "red")
 
 def check_f4(name, file):
     max_len = len(file)
