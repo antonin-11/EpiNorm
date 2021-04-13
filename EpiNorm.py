@@ -1,11 +1,14 @@
 #!/bin/env python3
-import os
+import os, sys
 
 def check_o2(name, file):
     if (name[-2:] != ".h" and name[-2:] != ".c"):
         print("Erreur (O2) fichier interdit " + name)
 
+print_file = False
+
 def verif_norm(path, file_name):
+    global print_file
     if (file_name[-2:] == ".h"):
         fd = open(path, "r")
         sto = fd.read()
@@ -31,8 +34,11 @@ def verif_norm(path, file_name):
         end_space(path, file)
         fd.close()
     else:
-        if (file_name != "Makefile"):
-            print_error(path, 0, "Type de fichier interdit.", "green")
+        if not "-f" in sys.argv and not print_file:
+            print_file = True
+            print_color("You have some forbidden files (Show them with -f)\n", "green", 1)
+        if (file_name != "Makefile" and "-f" in sys.argv):
+            print_error(path, 0, "Forbidden file type.", "green")
 
 def main():
     for (repertoire, sousRepertoires, fichiers) in os.walk("./"):
