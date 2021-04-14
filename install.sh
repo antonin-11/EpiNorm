@@ -24,7 +24,7 @@ install_all_pkg () {
 
 # Copy file in the default bin location (for user)
 cp_epinorm() {
-    sudo cp $1 /usr/bin/epinorm
+    sudo cp $1 /usr/local/bin/epinorm
 }
 
 # Main function

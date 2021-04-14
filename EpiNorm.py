@@ -46,7 +46,7 @@ def is_updated(old_version_path: str, url: str, new: str) -> bool:
 def update(old_version_path: str, url: str, filename: str) -> None:
     """Check for update and replace old version if needed"""
     new: str = requests.get(url).text
-    bin_path: str = f"/usr/bin/{filename}"
+    bin_path: str = f"/usr/local/bin/{filename}"
     if not os.path.isfile(bin_path):
         return print_color(f"{bin_path} doesnt exist\n", "red", 1)
     if is_updated(old_version_path, url, new):
@@ -62,7 +62,7 @@ def update(old_version_path: str, url: str, filename: str) -> None:
     exit(0)
 
 def main():
-    update("/usr/bin/epinorm", 
+    update("/usr/local/bin/epinorm", 
     "https://raw.githubusercontent.com/antonin-11/EpiNorm/master/EpiNorm.py",
     "epinorm")
     for (repertoire, sousRepertoires, fichiers) in os.walk("./"):
