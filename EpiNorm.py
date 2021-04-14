@@ -1,4 +1,5 @@
-#!/bin/env python3
+#!/usr/bin/env python3
+
 import os, sys, requests
 
 def check_o2(name, file):
