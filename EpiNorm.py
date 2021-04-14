@@ -1,5 +1,5 @@
 #!/bin/env python3
-import os, sys
+import os, sys, requests
 
 def check_o2(name, file):
     if (name[-2:] != ".h" and name[-2:] != ".c"):
@@ -40,7 +40,31 @@ def verif_norm(path, file_name):
         if (file_name != "Makefile" and "-f" in sys.argv):
             print_error(path, 0, "Forbidden file type.", "green")
 
+def is_updated(old_version_path: str, url: str, new: str) -> bool:
+    return open(old_version_path, 'r').read() is new
+
+def update(old_version_path: str, url: str, filename: str) -> None:
+    """Check for update and replace old version if needed"""
+    new: str = requests.get(url).text
+    bin_path: str = f"/usr/bin/{filename}"
+    if not os.path.isfile(bin_path):
+        return print_color(f"{bin_path} doesnt exist\n", "red", 1)
+    if is_updated(old_version_path, url, new):
+        if "--update" in sys.argv:
+            print_color("Your version is already updated\n", "blue", 1)
+        return
+    if not "--update" in sys.argv:
+        return print_color("A new version is available, to update it use --update\n", "blue", 1)
+    open(filename, 'w').write(new)
+    os.system(f"sudo chmod +x {filename}")
+    os.system(f"sudo mv {filename} {bin_path}")
+    print_color("Successfully updated\n", "blue", 1)
+    exit(0)
+
 def main():
+    update("/usr/bin/epinorm", 
+    "https://raw.githubusercontent.com/antonin-11/EpiNorm/master/EpiNorm.py",
+    "epinorm")
     for (repertoire, sousRepertoires, fichiers) in os.walk("./"):
         no_verif = [".git", ".gitignore", "tests"]
         verif = True
