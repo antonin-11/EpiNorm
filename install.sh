@@ -30,7 +30,7 @@ cp_epinorm() {
 # Main function
 main () {
     install_all_pkg
-    cp_epinorm EpiNorm.py
+    cp_epinorm epinorm.py
 }
 
 main
