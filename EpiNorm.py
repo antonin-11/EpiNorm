@@ -42,7 +42,7 @@ def verif_norm(path, file_name):
             print_error(path, 0, "Forbidden file type.", "green")
 
 def is_updated(old_version_path: str, url: str, new: str) -> bool:
-    return open(old_version_path, 'r').read() is new
+    return open(old_version_path, 'r').read() == new
 
 def update(old_version_path: str, url: str, filename: str) -> None:
     """Check for update and replace old version if needed"""
