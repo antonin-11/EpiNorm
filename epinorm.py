@@ -64,7 +64,7 @@ def update(old_version_path: str, url: str, filename: str) -> None:
 
 def main():
     update("/usr/local/bin/epinorm", 
-    "https://raw.githubusercontent.com/antonin-11/EpiNorm/master/EpiNorm.py",
+    "https://raw.githubusercontent.com/antonin-11/EpiNorm/master/epinorm.py",
     "epinorm")
     for (repertoire, sousRepertoires, fichiers) in os.walk("./"):
         no_verif = [".git", ".gitignore", "tests"]
